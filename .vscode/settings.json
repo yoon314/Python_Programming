@@ -1,8 +1,11 @@
 {
+    "terminal.integrated.defaultProfile.osx": "zsh",
+    "code-runner.runInTerminal": true,
     "code-runner.saveFileBeforeRun": true,
-    "python.terminal.activateEnvInCurrentTerminal": false,
-    "[python]": {
-        "editor.defaultFormatter": "ms-python.black-formatter",
-        "editor.formatOnSave": true
-    }
+    "terminal.integrated.profiles.osx": {
+        "zsh": {
+            "path": "/bin/zsh",
+        }
+    },
+    "python-envs.terminal.autoActivationType": "off"
 }
