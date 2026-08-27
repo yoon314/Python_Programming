@@ -55,7 +55,7 @@ print("Java" in s)                  # 미포함(False)
 print(s.startswith("Python"))       # True
 
 # # 특정 Suffix로 끝나고 있는지 알려주는 문자열 메소드
-# print()         # False
+print(s.endswith("Python"))         # False
 
 # # 이전 문자열을 새로운 문자열로 치환하는 문자열 메소드
 # # 문제) replace는 원본 문자열을 바꿀까요? 새로운 문자열을 만들까요?
