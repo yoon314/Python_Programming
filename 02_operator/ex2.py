@@ -20,7 +20,7 @@ max = a if a > b else b
 
 print("짝수" if a % 2 == 0 else "홀수")
 
-score = 85
+score = 69
 # 90점 이상이면 "A"
 # 80점 이상이면 "B"
 # 70점 이상이면 "C"
