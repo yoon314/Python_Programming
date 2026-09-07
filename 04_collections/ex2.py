@@ -74,16 +74,41 @@ print(nested_list[1][2])            # b 출력하기
 print(nested_list[2])               # 2 출력하기
 
 # 리스트 언패킹
+nums = [1,2,3,4]
 
+print(*nums)
 
+a,b,c,d = nums
+print(a,b,c,d)
+
+a,*b,c = nums                       # 확장 언패킹
+print(a,b,c)                        # 리스트 합치기1
+
+nums2 = [5,6]
+print(nums + nums2)
+
+print(*nums,*nums2)
 
 # zip함수: 반복 가능(iterable)한 여러 객체를 인자로 받아
 # 동일한 인덱스에 있는 원소들끼리 튜플로 묶어주는 파이썬 내장 함수
-subjects = ["국어", "수학", "영어"]
+subjects = ["국어", "수학", "영어","과학"]
 scores = [80, 90, 95]
 
+a,b,c = zip(subjects,scores)
+print(a,b,c)
 
 
+for subject, score in zip(subjects, scores):
+    print(f"{subject}: {score}점")
+
+# [x] : x자체를 원소 하나로 해서 넣음
+print([zip(subjects, scores)])
+
+# list(x) : x를 순회해서 리스트에 넣음
+print(list(zip(subjects, scores)))
+
+print(["python"])
+print(list("python"))
 
 # ===========================================================
 #  List Comprehension
@@ -91,58 +116,75 @@ scores = [80, 90, 95]
 # ===========================================================
 
 # 1 ~ 10의 제곱수 리스트 만들기
+# [1,4,9,16 .. 100]
 
+lis = []
+for i in range(1,11):
+    lis.append(i**2)
+print(lis)
+
+lis = [x**2 for x in range(1,11)]
+print(lis)
 
 # 1 ~ 10 중 짝수의 제곱수로 된 리스트 만들기 (필터링 if문 추가)
-
+lis = [x**2 for x in range(1,11) if x % 2 == 0]
+print(lis)
 
 # 1 ~ 10 중 짝수면 "짝", 홀수면 "홀" 출력하기
-
+lis = ["찍수" if x % 2 == 0 else "홀수" for x in range(1,11)]
+print(lis)
 
 # 각 이름의 길이로 이루어진 리스트 만들기
-
+names = ["pororo", "crong", "poby", "eddy"]
+# [6, 5, 4, 4]
+lis = [len(name) for name in names]
+print(lis)
 
 # 길이가 5 이상인 이름만 뽑기
-
+lis = [name for name in names if len(name) >= 5]
+print(lis)
 
 # 중첩 for문도 가능
-
-
+# x = 0 1 2
+# y = 0 1 2
+# x * y로 이루어진 리스트 [0,0,0]
+lis = [x*y for x in range(3) for y in range(3)]
+print(lis)
 
 # =========================================================
 #  🔥 실습 문제
 # =========================================================
 
 # 1️⃣ 60점 이상인 점수만 뽑기
-# scores = [85, 42, 73, 55, 90, 68, 35, 100]
+scores = [85, 42, 73, 55, 90, 68, 35, 100]
 
-# result = []
-# print(result)                       # ✅ [85, 73, 90, 68, 100] 출력
+result = [i for i in scores if i >= 60]
+print(result)                       # ✅ [85, 73, 90, 68, 100] 출력
 
 
 # 2️⃣ 60점 이상인 경우 "합격", 60점 미만은 "불합격"으로 처리
-# result = []
-# print(result)                       # ✅ ['합격', '불합격', '합격', '불합격', '합격', '합격', '불합격', '합격']
+result = ["합격" if score >= 60 else "불합격" for score in scores]
+print(result)                       # ✅ ['합격', '불합격', '합격', '불합격', '합격', '합격', '불합격', '합격']
 
 
 # 3️⃣ 1 ~ 100 중 3 또는 5의 배수의 합 구하기 (sum() 함수 이용)
-# result = None
-# print(result)                       # ✅ 2418 출력
+result = [x for x in range(1,101) if x % 3 == 0 or x % 5 == 0]
+print(sum(result))                       # ✅ 2418 출력
 
 
 # 4️⃣ n을 포함하고 있는 단어만 뽑기
-# words = ["apple", "banana", "kiwi", "mango"]
+words = ["apple", "banana", "kiwi", "mango"]
 
-# result = []  
-# print(result)                       # ✅ ['banana', 'mango'] 출력
+result = [word for word in words if 'n' in word]  
+print(result)                       # ✅ ['banana', 'mango'] 출력
 
 
 # 5️⃣ 세 학생의 3과목 점수표에서 과목별 평균 구하기
-# scores = [
-#     [90, 80, 70],       # 학생 1
-#     [100, 90, 80],      # 학생 2
-#     [80, 70, 60],       # 학생 3
-# ]
+scores = [
+    [90, 80, 70],       # 학생 1
+    [100, 90, 80],      # 학생 2
+    [80, 70, 60],       # 학생 3
+]
 
-# result = []
-# print(result)                       # ✅ [90.0, 80.0, 70.0]
+result = [sum(score) / 3 for score in scores]
+print(result)                       # ✅ [90.0, 80.0, 70.0]
