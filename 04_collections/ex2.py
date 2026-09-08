@@ -186,5 +186,17 @@ scores = [
     [80, 70, 60],       # 학생 3
 ]
 
-result = [sum(score) / 3 for score in scores]
+std1 = scores[0]
+std2 = scores[1]
+std3 = scores[2]
+result = [round(sum(i) / len(i),2) for i in zip(std1,std2,std3)]
+print(result)
+
+result = [round(sum(i) / len(i),2) for i in zip(*scores)]
 print(result)                       # ✅ [90.0, 80.0, 70.0]
+
+# 은행가 반올림
+print(round(0.5))
+print(round(1.5))
+print(round(2.5))
+print(round(3.5))
