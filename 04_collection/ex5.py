@@ -40,13 +40,31 @@ print(d)
 del d["phone"]
 print(d)
 
+print(d.pop("age"))
+print(d)
+
 # ===========================================================
 # 2. 딕셔너리는 iterable하다. (반복 가능)
 # ===========================================================
 
 # 딕셔너리 순회
+for key in d:
+    print(key, d[key])
 
+for i,data in enumerate(d):
+    print(i,data)
 
+for value in d.values():
+    print(value)
+
+for key, value in d.items():
+    # d["key"] = 100
+    print(key, value)
+
+print(d)
+a = d.items()
+d["key"] = 100
+print(a)
 
 # ===========================================================
 # 3. 딕셔너리는 sequence 객체가 아니다. (인덱싱, 슬라이싱 불가)
