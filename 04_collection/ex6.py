@@ -8,7 +8,14 @@ d = {"name": "뽀로로", "age": 5}
 
 d2 = {"age": 23, "city": "일산"}
 
+d.update(d2)        #upsert
+print(d)
 
+print(d.pop("city"))
+print(d)
+
+d.clear()
+print(d)
 
 # ===========================================================
 #  그 외
@@ -17,7 +24,13 @@ d2 = {"age": 23, "city": "일산"}
 d = {"kor": 90, "mat": 85, "eng": 80, "prog": 100}
 
 # 딕셔너리 언패킹
+print(*d)
+print(*d.values())
 
+a, *b, c = d
+print(a,b,c)
+
+print({**d})
 
 
 # 위 딕셔너리를 key 리스트와 value 리스트로 만들기
