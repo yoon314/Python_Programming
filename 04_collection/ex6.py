@@ -84,7 +84,7 @@ for word in words:
     count[word] = count.get(word,0) + 1
 
 # 2) dict 컴프리헨션
-print({word: words.count(word) for word in words})
+print({word: words.count(word) for word in set(words)})
 
 # 3) Counter: 요소 갯수를 자동으로 세어주는 딕셔너리 서브클래스
 from collections import Counter
