@@ -7,7 +7,15 @@
 # 함수 밖에서 선언된 변수는 전역변수이며, 함수 안에서는 기본적으로
 # "읽기"만 가능하고, 값을 바꾸려면 global 키워드가 필요하다.
 
+a = 1            # 전역변수
 
+def func():
+    global a
+    a = 10       # 지역변수
+    print("함수 안:", a)
+
+func()
+print("함수 밖:",a)
 
 
 # ===========================================================
@@ -20,7 +28,36 @@
 #                        mutable 객체인 경우 call-by-reference처럼 동작 -> 함수 내부에서 수정 시 원본 변경
 #                        mutable 객체라도 재할당을 하면 원본과 연결이 끊기고 새로운 객체 할당
 
+def swap(a, b):     # 매개변수는 객체의 참조값을 전달 (같은 객체를 가리킴)
+    a,b = b,a
+    print(a,b)      # 2,1 -> 함수 종료 시 지역변수 a, b 유효하지 않게 됨
 
+a,b = 1,2
+print(id(a),id(b))
+swap(a,b)           # a,b 객체의 참조값을 전달
+print(a,b)          # 1,2 -> 전역변수 a,b 출력
+
+
+def append_item(num):   # num 매개변수가 객체 참조값 복사
+    num.append(2)       # 리스트 객체를 변경
+
+num = [1]
+append_item(num)        # 리스트 객체의 참조값 전달
+print(num)
+
+def swap2(num):
+    num[0], num[1] = num[1], num[0]
+
+swap2(num)
+print(num)
+
+
+def assign(num):
+    num = [10]
+    print(num)
+
+assign(num)
+print(num)
 
 # ===========================================================
 # 3. 재귀함수

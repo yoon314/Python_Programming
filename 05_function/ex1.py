@@ -83,9 +83,14 @@ print(add_all(*a))
 # 이름=값 형태로 몇 개가 들어올지 모를 때 **kwargs를 사용한다.
 # kwargs라는 이름으로 입력값들을 모아 딕셔너리로 만든다.
 
+def introduce2(**kwargs):
+    print(kwargs)
 
+introduce2(name="크롱", age=4, kind="공룡")
+introduce2(name="크롱", age=4, kind="공룡", addr="뽀로로집")
 
 d = {"name": "크롱", "age": 4, "kind": "공룡"}
+introduce2(**d)
 
 
 # ===========================================================
@@ -98,5 +103,15 @@ d = {"name": "크롱", "age": 4, "kind": "공룡"}
 # - 아빠한테 받은 돈 : 10000원
 # - 엄마한테 받은 돈 : 5000원 => 키워드 가변인자 (딕셔너리)
 
-def pocket_money():
-    pass
+# def pocket_money(l, *args, **kwargs):
+#     return sum(*args) + sum(kwargs.values()) + l
+
+# print(pocket_money(500,(100,200),**{"dad":10000, "mom":5000}))
+
+def pocket_money(remain, *args, **kwargs):
+    tot = remain
+    tot += sum(args)
+    tot += sum(kwargs.values())
+    return tot
+
+print(pocket_money(500,100,200,300,dad = 10000, mom = 5000,uncle=100000))
