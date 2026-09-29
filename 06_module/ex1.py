@@ -61,6 +61,10 @@ print(response.status_code)
 print(response.text)
 print(type(response.text))
 
+# 직렬화와 역직렬화
+# - 직렬화(Serialization): 메모리 상의 객체를 파일 저장 or 전송이 가능한 형태로 변환
+# - 역직렬화(Deserialization): 저장된 or 전송받은 데이터를 원래 객체로 변환
+# - 직렬화 방식: XML, JSON, YAML
 d = response.json()     # 응답받은 JSON 형식의 문자열을 Python 객체로 변환
 
 print(type(d))
@@ -71,6 +75,14 @@ print(d["origin"])
 # 3. 사용자 정의 모듈 만들기
 # ===========================================================
 
+import mymath
+from mymath import PI, add
+
+print(mymath.PI)
+print(mymath.add(10,20))
+
+print(PI)
+print(add(10,20))
 
 
 # __pycache__ 디렉토리란?

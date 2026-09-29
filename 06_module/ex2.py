@@ -9,17 +9,26 @@
 #  - from 패키지명.모듈명 import 함수명 (from 가져올 위치 import 가져올 대상)
 # ===========================================================
 
+from mypackage import mymath
+from mypackage.mymath import PI, add
 
+print(mymath.PI)
+print(mymath.add(10,20))
 
 # ===========================================================
 # 2. __init__에서 re-export한 것 사용하기
 # ===========================================================
 
+import mypackage as m
+
+print(m.VERSION)
+print(m.add(10,20))
 
 
 url = "https://httpbin.org/get"
 
 # re-export하지 않은 경우 세부 모듈 경로를 알아야 함
 
+import numpy
 
 # re-export를 한 경우에는 세부 모듈 경로를 몰라도 됨
