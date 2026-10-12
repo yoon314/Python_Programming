@@ -218,7 +218,7 @@ class Student:
     
     @classmethod
     def get_std_cnt(cls):
-        return Student.cnt
+        return cls.cnt
 
 
 
