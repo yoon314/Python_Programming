@@ -2,4 +2,7 @@
     "terminal.integrated.defaultProfile.osx": "zsh",
     "code-runner.saveFileBeforeRun": true,
     "code-runner.preserveFocus": false,
+    "github.copilot.enable": {
+        "*": false
+    },
 }
