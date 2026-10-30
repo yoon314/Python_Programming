@@ -18,7 +18,8 @@ load_dotenv()
 
 # 공공데이터포털 인증키 가져오기
 api_key = os.getenv("DATA_API_KEY")
-print(api_key)
+
+# print(api_key)
 
 # 기준일자, 기준시간 가져오기
 now = datetime.now()
@@ -26,7 +27,7 @@ before_one_hour = now - timedelta(hours=1)
 
 base_date = now.strftime("%Y%m%d")
 base_time = before_one_hour.strftime("%H00")
-# print(f"기준일시: {base_date} {base_time}")
+print(f"기준일시: {base_date} {base_time}")
 
 
 # 날씨 코드
@@ -57,26 +58,31 @@ def get_weather_info(SERVICE_KEY, base_date=base_date, base_time=base_time):
         }
 
         response = requests.get(url, timeout=10, params=params)
+        print(response)
 
         if response.status_code != 200:
             print(f"요청 실패 (상태 코드: {response.status_code})")
             return
         
         data = response.json()
-        # pprint.pprint(data)
+        pprint.pprint(data)
 
         # 응답코드 조회
         result_cd = None
 
-        if result_cd != "00":
-            print(f"요청 실패 (Open API 결과 코드: {result_cd})")
-            return
+        # if result_cd != "00":
+        #     print(f"요청 실패 (Open API 결과 코드: {result_cd})")
+        #     return
         
         # 초단기실황조회 결과 출력
-        items = None
+        items = data['response']['body']['items']['item']
 
+        # 강수형태: 0
+        # 습도: 55
+        # 1시간 강수량: 0
         for item in items:
-            pass
+            print(f"{WEATHER_CODE[item['category']]}: {item['obsrValue']}")
+            
 
     except requests.exceptions.Timeout as e:
         print(f"서버 응답시간 초과: {e}")
@@ -114,7 +120,7 @@ def get_food_info(KEY, sc_code, schul_code, mlsv_ymd=base_date):
             return
         
         data = response.json()
-        # pprint.pprint(data)
+        pprint.pprint(data)
 
         # 응답코드 조회
         if "RESULT" in data:
@@ -124,7 +130,14 @@ def get_food_info(KEY, sc_code, schul_code, mlsv_ymd=base_date):
             return
 
         # 급식정보 출력
+        # 기준일자: 20261029
+        # 메뉴: XXXX
+        items = data['mealServiceDietInfo'][1]['row'][0]
 
+        print(f"기준 일자: {items['LOAD_DTM']}")
+        for i in items["DDISH_NM"].split('\n'):
+            print(i)
+            print(f"메뉴: {i}")
     
     except requests.exceptions.Timeout as e:
         print(f"서버 응답시간 초과: {e}")
@@ -135,6 +148,6 @@ def get_food_info(KEY, sc_code, schul_code, mlsv_ymd=base_date):
 
 
 # 나이스 인증키 가져오기
+neis_api_key = os.getenv("NEIS_API_KEY")
 
-
-# get_food_info(neis_api_key, sc_code="J10", schul_code="7530560")
+get_food_info(neis_api_key, sc_code="J10", schul_code="7530560")
