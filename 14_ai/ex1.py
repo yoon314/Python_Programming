@@ -55,6 +55,7 @@ print(token)
 # sentences = [
 #     "I love this movie. It was fantastic!",
 #     "The food was cold and the service was terrible.",
+#     "FUCK YOU",
 # ]
 
 # for sentence in sentences:
@@ -80,11 +81,11 @@ print(token)
 # print()
 # print("3. 파이프라인 : 텍스트 생성")
 
-# pipe = pipeline(
-#     "text-generation", 
-#     model="Qwen/Qwen2.5-0.5B-Instruct",
-#     token=token
-# )
+pipe = pipeline(
+    "text-generation", 
+    model="Qwen/Qwen2.5-0.5B-Instruct",
+    token=token
+)
 
 
 # # [role 지정]
@@ -120,19 +121,19 @@ print(token)
 # # - 질문할 때마다 user 메시지를 목록에 추가하고, 모델의 답변도 assistant 로 목록에 추가
 # # - 다음 질문 때 지금까지의 대화 전체가 모델에 전달되어 앞 내용을 기억하는 것처럼 동작
 
-# chat = [
-#     {"role": "system", "content": "너는 친절한 파이썬 선생님이야. 모든 질문에 짧은 한 문장으로 답해줘."},
-# ]
+chat = [
+    {"role": "system", "content": "너는 친절한 파이썬 선생님이야. 모든 질문에 짧은 한 문장으로 답해줘."},
+]
 
-# while True:
-#     question = input("질문 : ").strip()
-#     if question.lower() == "exit":
-#         break
+while True:
+    question = input("질문 : ").strip()
+    if question.lower() == "exit":
+        break
 
-#     chat.append({"role": "user", "content": question})              # 질문 추가
+    chat.append({"role": "user", "content": question})              # 질문 추가
 
-#     result = pipe(chat, max_new_tokens=100)
-#     answer = result[0]["generated_text"][-1]["content"]             # 마지막 메시지 = 모델의 답변
+    result = pipe(chat, max_new_tokens=100)
+    answer = result[0]["generated_text"][-1]["content"]             # 마지막 메시지 = 모델의 답변
 
-#     chat.append({"role": "assistant", "content": answer})           # 답변도 추가 (다음 질문 때 함께 전달)
-#     print(f"답변 : {answer}\n")
+    chat.append({"role": "assistant", "content": answer})           # 답변도 추가 (다음 질문 때 함께 전달)
+    print(f"답변 : {answer}\n")

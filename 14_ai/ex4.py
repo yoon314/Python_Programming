@@ -3,7 +3,7 @@
 import os
 import json
 import torch
-from transformers import AutoTokenizer, AutoModelForCausalLM
+from transformers import PreTrainedTokenizerFast, AutoModelForCausalLM
 
 # ===========================================================
 #  1. 패키지 목록
@@ -69,10 +69,13 @@ print(f"학습용 {len(train_sentences)}개 / 평가용 {len(test_sentences)}개
 #  - dtype=torch.float32 : 학습할 때는 숫자를 정밀하게(32비트) 다뤄야 함
 # ===========================================================
 
-# model_name = "Qwen/Qwen2.5-0.5B-Instruct"
+model_name = "skt/kogpt2-base-v2"
 
 # tokenizer = AutoTokenizer.from_pretrained(model_name)
-# model = AutoModelForCausalLM.from_pretrained(model_name, dtype=torch.float32)
+tokenizer = PreTrainedTokenizerFast.from_pretrained("skt/kogpt2-base-v2",
+  bos_token='</s>', eos_token='</s>', unk_token='<unk>',
+  pad_token='<pad>', mask_token='<mask>')
+model = AutoModelForCausalLM.from_pretrained(model_name, dtype=torch.float32)
 
 
 # ===========================================================
